@@ -27,5 +27,18 @@ namespace user.Controllers
 
             return Ok(userDto);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var user = await _userRepo.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user.ToUserDto());
+        }
     }
 }
