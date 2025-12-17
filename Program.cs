@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using user.Data;
+using user.Interface;
+using user.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+//Dependency Injection of the interface and repository...
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
