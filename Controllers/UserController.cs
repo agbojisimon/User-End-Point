@@ -51,5 +51,19 @@ namespace user.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = userModel.Id }, userModel.ToUserDto());
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserDto userDto)
+        {
+            var user = await _userRepo.UpdateAsync(id, userDto);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user.ToUserDto());
+
+        }
     }
 }

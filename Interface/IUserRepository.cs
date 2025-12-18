@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using user.DTOs.User;
 using user.Models;
 
 namespace user.Interface
@@ -11,6 +12,6 @@ namespace user.Interface
         Task<List<User>> GetAllAsync();
         Task<User?> GetByIdAsync(int id);
         Task<User> CreateAsync(User userModel);
-        Task<User> UpdateAsync(User userModel);
+        Task<User?> UpdateAsync(int id, UpdateUserDto userDto);
     }
 }

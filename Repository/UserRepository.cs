@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using user.Data;
+using user.DTOs.User;
 using user.Interface;
 using user.Models;
 
@@ -34,6 +35,23 @@ namespace user.Repository
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _context.Users.FindAsync(id);
+        }
+
+        public async Task<User?> UpdateAsync(int id, UpdateUserDto userDto)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (existingUser == null)
+            {
+                return null;
+            }
+
+            existingUser.FirstName = userDto.FirstName;
+            existingUser.LastName = userDto.LastName;
+            existingUser.Role = userDto.Role;
+
+            await _context.SaveChangesAsync();
+
+            return existingUser;
         }
     }
 }
