@@ -65,5 +65,18 @@ namespace user.Controllers
             return Ok(user.ToUserDto());
 
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var userModel = await _userRepo.DeleteAsync(id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }

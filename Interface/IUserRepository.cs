@@ -13,5 +13,6 @@ namespace user.Interface
         Task<User?> GetByIdAsync(int id);
         Task<User> CreateAsync(User userModel);
         Task<User?> UpdateAsync(int id, UpdateUserDto userDto);
+        Task<User?> DeleteAsync(int id);
     }
 }

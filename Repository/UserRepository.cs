@@ -27,6 +27,20 @@ namespace user.Repository
             return userModel;
         }
 
+        public async Task<User?> DeleteAsync(int id)
+        {
+            var userModel = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (userModel == null)
+            {
+                return null;
+            }
+            _context.Users.Remove(userModel);
+
+            await _context.SaveChangesAsync();
+
+            return userModel;
+        }
+
         public async Task<List<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();
