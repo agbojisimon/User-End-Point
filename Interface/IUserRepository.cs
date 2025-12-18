@@ -10,5 +10,7 @@ namespace user.Interface
     {
         Task<List<User>> GetAllAsync();
         Task<User?> GetByIdAsync(int id);
+        Task<User> CreateAsync(User userModel);
+        Task<User> UpdateAsync(User userModel);
     }
 }

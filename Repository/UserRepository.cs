@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using user.Data;
 using user.Interface;
@@ -16,6 +17,15 @@ namespace user.Repository
         {
             this._context = context;
         }
+
+        public async Task<User> CreateAsync(User userModel)
+        {
+            await _context.Users.AddAsync(userModel);
+            await _context.SaveChangesAsync();
+
+            return userModel;
+        }
+
         public async Task<List<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();

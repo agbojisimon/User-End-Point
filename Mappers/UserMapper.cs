@@ -21,5 +21,15 @@ namespace user.Mappers
                 Role = userModel.Role
             };
         }
+        public static User ToUserFromCreateDto(this CreateUserDto userDto)
+        {
+            return new User
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                Role = userDto.Role
+            };
+        }
     }
 }

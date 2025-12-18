@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using user.DTOs.User;
 using user.Interface;
 using user.Mappers;
 
@@ -39,6 +40,16 @@ namespace user.Controllers
             }
 
             return Ok(user.ToUserDto());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
+        {
+            var userModel = userDto.ToUserFromCreateDto();
+
+            await _userRepo.CreateAsync(userModel);
+
+            return CreatedAtAction(nameof(GetById), new { id = userModel.Id }, userModel.ToUserDto());
         }
     }
 }
